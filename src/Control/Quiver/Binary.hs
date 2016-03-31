@@ -1,4 +1,4 @@
-{-# LANGUAGE RankNTypes, ScopedTypeVariables #-}
+{-# LANGUAGE RankNTypes #-}
 {- |
    Module      : Control.Quiver.Binary
    Description : Support Binary inside Quiver
@@ -6,7 +6,12 @@
    License     : MIT
    Maintainer  : Ivan.Miljenovic@gmail.com
 
+This module provides functions for encoding\/decoding values within a
+Quiver.
 
+For any I\/O operations, use the functions provided by the
+<http://hackage.haskell.org/package/quiver-bytestring quiver-bytestring>
+package.
 
  -}
 module Control.Quiver.Binary (
@@ -58,13 +63,11 @@ spuntilM chk prod = go
 -- that the error message does not return the 'ByteOffset' from the
 -- 'Decoder' as it will probably not match the actual location of the
 -- source ByteString.
-spdecode :: forall a m. (Binary a, Monad m) => SP ByteString a m String
+spdecode :: (Binary a, Monad m) => SP ByteString a m String
 spdecode = runDecode nextD
   where
-    nextD :: Decoder a
     nextD = runGetIncremental get
 
-    runDecode :: Decoder a -> SP ByteString a m String
     runDecode d = case d of
                     Fail b' _ err -> if B.null b'
                                         then spcomplete -- No more input! (should probably also check the offset)
