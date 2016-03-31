@@ -32,10 +32,9 @@ import Data.Binary
 import Data.Binary.Get
 import Data.Binary.Put
 
-import           Control.Monad.IO.Class
-import           Data.ByteString        (ByteString)
-import qualified Data.ByteString        as B
-import qualified Data.ByteString.Lazy   as L
+import           Data.ByteString      (ByteString)
+import qualified Data.ByteString      as B
+import qualified Data.ByteString.Lazy as L
 
 --------------------------------------------------------------------------------
 
@@ -54,8 +53,7 @@ spuntilM chk prod = go
             if done
                then spcomplete
                else do a <- qlift prod
-                       spemit a
-                       go
+                       a >:> go
 
 --------------------------------------------------------------------------------
 
@@ -73,7 +71,7 @@ spdecode = runDecode nextD
                                         then spcomplete -- No more input! (should probably also check the offset)
                                         else spfailed err
                     Partial p     -> spfetch >>= runDecode . p
-                    Done b' o a   -> a >:> runDecode (nextD `pushChunk` b')
+                    Done b' _ a   -> a >:> runDecode (nextD `pushChunk` b')
 
 -- TODO: consider using state internally to keep track of the offset throughout the entire thing
 
