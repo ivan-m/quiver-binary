@@ -12,6 +12,10 @@ build-type:          Simple
 extra-source-files:  README.md
 cabal-version:       >=1.10
 
+source-repository head
+    type:         git
+    location:     git://github.com/ivan-m/quiver-binary.git
+
 library
   exposed-modules:     Control.Quiver.Binary
   -- other-modules:
