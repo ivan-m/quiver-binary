@@ -12,4 +12,4 @@ library for I/O.
 
 [quiver]: http://hackage.haskell.org/package/quiver
 [binary]: https://hackage.haskell.org/package/binary
-[quiver-bytesring]: http://hackage.haskell.org/package/quiver-bytestring
+[quiver-bytestring]: http://hackage.haskell.org/package/quiver-bytestring
