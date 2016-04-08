@@ -23,6 +23,8 @@ module Control.Quiver.Binary (
   , spdecodeL
   , spencode
   , spencodeL
+    -- * Re-exports
+  , Binary
   ) where
 
 import Control.Quiver.ByteString
