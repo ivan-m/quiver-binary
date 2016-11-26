@@ -1,5 +1,5 @@
 name:                quiver-binary
-version:             0.1.1.0
+version:             0.1.1.1
 synopsis:            Binary serialisation support for Quivers
 description:         Handling for the binary library within Quivers
 license:             MIT
